@@ -20,11 +20,19 @@ html lang="en"
 	body
 		.page
 			- fonts = ["Abril Fatface", "Amatic SC", "Arial", "Beth Ellen", "Book Antiqua", "Coiny", "Comic Sans MS", "Courier", "Geneva", "Georgia", "Geostar Fill", "Helvetica Neue", "Impact", "Lucida Grande", "Monaco", "Nunito", "Palatino", "Papyrus", "Playfair Display", "Shadows Into Light", "Tahoma", "Times New Roman", "Trebuchet MS", "Yeseva One"];
-
 			header
-				h1 
-					a href="/" Font Butts
-				h2 Does this font make my butt look big?
+				hgroup
+					h1 
+						a href="/" Font Butts
+					h2 Does this font make my butt look big?
+				aside.share
+					.share-button.twitter-button
+						a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-text="Font Butts - Does this font make my butt look big?" data-url="https://fontbutts.netlify.app/" data-related="bennettfeely" data-dnt="true" data-show-count="false" Tweet
+						script async="async" src="https://platform.twitter.com/widgets.js" charset="utf-8"
+					.share-button.facebook-button
+						#fb-root
+						script async="async" defer="defer" crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v7.0&appId=247433128675302&autoLogAppEvents=1" nonce="TgnPIgEY"
+						.fb-like data-href="https://fontbutts.netlify.app/" data-width="" data-layout="button" data-action="like" data-size="large" data-share="false"
 			main
 				.main-carousel.carousel
 					- for font in fonts  do
@@ -39,14 +47,16 @@ html lang="en"
 				button.next
 					.arrow
 					.arrow-arm
+				aside.ad-wrapper
+					script#_carbonads_js async="async" type="text/javascript" src="//cdn.carbonads.com/carbon.js?serve=CKYIL27N&placement=bennettfeelycom"
+					button.close &times;
 			footer
 				.secondary-carousel.carousel
 					- for font in fonts  do
 						.carousel-cell style="font-family: #{font}"
 							.carousel-cell-content
 								h3 #{font}
-			aside.ad-wrapper
-				script#_carbonads_js async="async" type="text/javascript" src="//cdn.carbonads.com/carbon.js?serve=CKYIL27N&placement=bennettfeelycom"
+		
 		script src="src/flickity.pkgd.min.js"
 		javascript:
 			var main = new Flickity('.main-carousel', {
@@ -87,6 +97,12 @@ html lang="en"
 				setTimeout(function() {
 					next.classList.remove('is-active');
 				}, 300);
+			});
+
+			var close = document.querySelector('.close');
+			var ad_wrapper = document.querySelector('.ad-wrapper');
+			close.addEventListener( 'click', function() {
+				ad_wrapper.classList.add('is-hidden');
 			});
 
 
