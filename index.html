@@ -2,6 +2,18 @@
       let transition = 300; // ms
       let root =  document.documentElement;
       
+      // var slides = document.querySelectorAll(".main-carousel .carousel-cell");
+      // slides.forEach((slide) => {
+      // 	console.log(slide);
+      
+      // 	var hue = Math.random() * 360;
+      // 	slide.style.backgroundColor =  'hsl('+ hue + ', 50%, 20%)';
+      
+      // 	var hue = Math.random() * 360;
+      // 	slide.style.color =  'hsl('+ hue + ', 50%, 80%)';
+      
+      // });
+      
       // Main slider
       var main = new Flickity('.main-carousel', {
           cellAlign: 'center',
@@ -12,11 +24,11 @@
           wrapAround: true,
           on: {
               change: function() {
-                  var hue = Math.random() * 360;
-                  root.style.setProperty('--background', 'hsl('+ hue + ', 50%, 20%)');
+                  // var hue = Math.random() * 360;
+                  // root.style.setProperty('--background', 'hsl('+ hue + ', 50%, 20%)');
       
-                  var hue = Math.random() * 360;
-                  root.style.setProperty('--color', 'hsl('+ hue + ', 50%, 80%)');
+                  // var hue = Math.random() * 360;
+                  // root.style.setProperty('--color', 'hsl('+ hue + ', 50%, 80%)');
               }
           }
       });
