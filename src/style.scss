@@ -211,11 +211,7 @@ main {
 	}
 
 	.is-selected .carousel-cell-content {
-		transform: translateY(-100%);
-
-		@media (min-width: $tablet) {
-			transform: scale(2) translateY(-75%);
-		}
+		transform: scale(2) translateY(-75%);
 	}
 }
 
@@ -245,7 +241,6 @@ main {
 	&:hover {
 		background: var(--background);
 		border-color: var(--color);
-		// box-shadow: var(--shadow);
 	}
 
 	&:active,
@@ -355,7 +350,7 @@ main {
 	align-items: center;
 	justify-content: center;
 	vertical-align: top;
-	min-width: 6em;
+	min-width: 7em;
 }
 
 .twitter-button {
@@ -365,23 +360,6 @@ main {
 .facebook-button {
 	padding: 0 1em 0 0.25em;
 }
-
-// @media (min-width: $desktop) {
-// 	.twitter-button {
-// 		filter: grayscale(1) brightness(1);
-// 	}
-
-// 	.facebook-button {
-// 		filter: grayscale(1) brightness(1.2);
-// 	}
-
-// 	header:hover ~ .share,
-// 	.share:hover {
-// 		.share-button {
-// 			filter: grayscale(0) brightness(1);
-// 		}
-// 	}
-// }
 
 // Ad ==================================================================
 .ad-wrapper {
@@ -406,7 +384,6 @@ main {
 	border: 1px solid var(--color);
 	min-height: calc(100px + 1.75em);
 	padding: 0.75em 0;
-	// box-shadow: var(--shadow);
 
 	@media (min-width: $desktop) {
 		width: 20em;
@@ -440,7 +417,6 @@ main {
 	img {
 		vertical-align: top;
 		background: var(--background);
-		// box-shadow: var(--shadow);
 	}
 
 	&:after {
@@ -537,10 +513,13 @@ main {
 
 // Footer ==============================================================
 .copyright-wrapper {
+	padding-bottom: 1em;
+
 	@media (min-width: $desktop) {
 		position: absolute;
 		top: 3.625em;
 		left: 1.5em;
+		padding: 0;
 	}
 }
 
