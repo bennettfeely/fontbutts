@@ -4,137 +4,145 @@
 @import "extensions";
 
 $tablet: 40em;
-$sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,
-	sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-$transition: 0.2s;
-
-$black: #000;
-$background: white;
-$color: black;
+$desktop: 60em;
+$sans-serif: -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
 
 // Base ================================================================
+:root {
+	--transition: 0;
+	--background: #fff;
+	--color: #000;
+
+	@media (prefers-color-scheme: dark) {
+		--background: #000;
+		--color: #ffeb3b;
+	}
+}
+
+.is-ready {
+	--transition: 300ms;
+}
+
 body {
-	display: flex;
-	flex-direction: column;
 	font: 100%/1.5 $sans-serif;
 	text-align: center;
-	min-height: 100vh;
-	overflow: hidden;
 }
 
 .page {
-	// filter: invert(0.1);
-	// background: ghostwhite;
-	background: $background;
-	color: $color;
-}
+	position: relative;
+	background: var(--background);
+	color: var(--color);
+	width: 100%;
+	overflow-x: hidden;
 
-h1,
-h2,
-h3 {
-	font-weight: normal;
-}
-
-h1,
-h2 {
-	padding: 0 1.5em;
-	background: $background;
+	@media (min-width: $desktop) {
+		overflow: hidden;
+	}
 }
 
 h1 {
-	font-size: 1em;
+	font-size: 1.2em;
+	padding: 0 1.5rem;
 	font-weight: 700;
 
 	a {
-		color: $color;
-		transition: opacity $transition;
 		text-decoration: none;
-
-		&:hover {
-			opacity: 0.5;
-		}
 	}
 }
 
 h2 {
-	font-size: smaller;
-	margin-left: 3rem;
+	font-size: 0.75em;
+	padding: 0 1.5rem;
+	font-weight: normal;
+}
+
+h2,
+p {
+	font-size: 0.75em;
+
+	span {
+		opacity: 0.75;
+	}
 }
 
 h3 {
 	font-size: 1em;
+	font-weight: normal;
 }
 
-header,
-footer {
-	line-height: 3em;
+a {
+	color: var(--color);
+
+	&:hover {
+		opacity: 0.5;
+	}
+}
+
+path {
+	stroke: currentColor;
+	stroke-width: 1px;
+	stroke-linecap: round;
+	vector-effect: non-scaling-stroke;
+	fill: none;
 }
 
 // Header ==============================================================
 header {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
 	background: linear-gradient(
 		transparent 0,
 		transparent 50%,
-		$color 0,
-		$color calc(50% + 1px),
+		var(--color) 0,
+		var(--color) calc(50% + 1px),
 		transparent 0,
 		transparent 100%
 	);
+	background-size: 100% 3.5em;
+	background-repeat: no-repeat;
+
+	padding: 0.75em 0;
 }
 
 hgroup {
-	display: flex;
-}
+	margin: 0 auto;
 
-.share {
-	display: inline-flex;
-	align-items: center;
-	line-height: 1;
-}
+	@media (min-width: $tablet) {
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+	}
 
-.share-button {
-	display: flex;
-	align-items: center;
-	padding: 0 0.75em 0 1.5em;
-	background: white;
-	vertical-align: middle;
-	margin: 0;
-	transition: filter $transition;
-}
+	h1 {
+		display: inline-block;
+		background: var(--background);
+	}
 
-.twitter-button {
-	filter: grayscale(1) brightness(1);
-}
-
-.facebook-button {
-	padding-right: 1.5em;
-	padding: 0 1.5em 0 0;
-	filter: grayscale(1) brightness(1.2);
-}
-
-header:hover {
-	.share-button {
-		filter: grayscale(0) brightness(1);
+	h2 {
+		@media (min-width: $tablet) {
+			display: inline-block;
+			background: var(--background);
+			margin-left: 1.5rem;
+			vertical-align: middle;
+		}
 	}
 }
 
+// Main ================================================================
 main {
 	position: relative;
-	flex: 1;
 }
 
 .main-carousel {
-	width: 100%;
-
 	.carousel-cell {
-		display: flex;
-		align-items: center;
-		justify-content: center;
 		width: 100%;
-		min-height: calc(100vh - 6em);
+		padding: 6em 0 9em;
+
+		@media (min-width: $tablet) {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			height: calc(100vh - 6em);
+			padding: 0 0 9em;
+		}
 	}
 }
 
@@ -142,9 +150,8 @@ main {
 	font-size: 20vmin;
 	line-height: 1;
 	pointer-events: none;
-	padding-bottom: 6rem;
 	white-space: nowrap;
-	transition: opacity $transition * 2;
+	transition: opacity calc(var(--transition) * 2);
 	opacity: 0.1;
 
 	.is-selected & {
@@ -154,65 +161,104 @@ main {
 }
 
 .secondary-carousel {
+	line-height: 3em;
 	background: linear-gradient(
 		transparent 0,
 		transparent 50%,
-		$color 0,
-		$color calc(50% + 1px),
+		var(--color) 0,
+		var(--color) calc(50% + 1px),
 		transparent 0,
 		transparent 100%
 	);
 
 	.carousel-cell {
-		width: max-content;
-		padding: 0 0.75em;
+		padding: 0 1.5em;
+		width: 12em;
 
 		&:after {
 			display: block;
 			content: "";
 			position: absolute;
 			left: 50%;
-			top: -1.5em;
+			top: 0;
 			bottom: 50%;
 			width: 1px;
-			background: $color;
-			transition: transform $transition;
+			background: var(--color);
 			transform: scaleY(0);
 			transform-origin: center bottom;
+			transition: transform var(--transition);
+
+			@media (min-width: $tablet) {
+				top: -25%;
+			}
 		}
 
-		&.is-selected:after {
-			transform: scaleY(1);
+		&.is-selected {
+			&:after {
+				transform: scaleY(1);
+			}
+		}
+
+		&:hover:not(.is-selected) .carousel-cell-content {
+			text-decoration: underline;
+			cursor: pointer;
 		}
 	}
 
 	.carousel-cell-content {
+		display: inline-block;
+		white-space: nowrap;
 		position: relative;
-		background: $background;
+		background: var(--background);
 		padding: 0 1.5em;
-		transition: transform $transition * 1.5;
+		transition: transform calc(var(--transition) * 1.5);
 	}
 
 	.is-selected .carousel-cell-content {
-		transform: scale(2) translateY(-100%);
+		transform: translateY(-100%);
+
+		@media (min-width: $tablet) {
+			transform: scale(2) translateY(-75%);
+		}
 	}
 }
 
 .previous,
 .next {
-	display: flex;
-	align-items: center;
+	display: inline-block;
 	position: absolute;
-	width: 3em;
-	height: 3em;
-	top: calc(50% - 3em);
+	top: calc(50% - 1.5em);
 	border: 0;
-	transition: width $transition;
 	cursor: pointer;
 	background: transparent;
 
+	svg {
+		width: 3em;
+		height: 3em;
+		border: 1px solid var(--background);
+		transition: width var(--transition);
+	}
+
 	&:hover {
-		width: 6em;
+		svg {
+			background: var(--background);
+			border-color: var(--color);
+			box-shadow: 0 0.5em 1.5em rgba(0, 0, 0, 0.15);
+		}
+	}
+
+	&:active,
+	&.is-active {
+		svg {
+			animation: pop var(--transition);
+			background: var(--background);
+
+			@keyframes pop {
+				from {
+					width: 4.5em;
+				}
+			}
+		}
 	}
 
 	&:focus {
@@ -222,55 +268,29 @@ main {
 
 .previous {
 	left: 1.5em;
-
-	&:active {
-		transform: translateX(-0.75em);
-	}
-
-	&.is-active {
-		animation: push-previous 0.3s;
-
-		@keyframes push-previous {
-			0% {
-				transform: translateX(-0.75em);
-			}
-		}
-	}
+	transform-origin: left center;
 }
 
 .next {
 	right: 1.5em;
-	transform: scale(-1);
-
-	&:active {
-		transform: translateX(0.75em) scale(-1);
-	}
-
-	&.is-active {
-		animation: push-next 0.3s;
-
-		@keyframes push-next {
-			0% {
-				transform: translateX(0.75em) scale(-1);
-			}
-		}
-	}
+	transform-origin: right center;
 }
 
 .arrow {
+	@extend %no-tap;
 	position: absolute;
-	width: 2em;
-	height: 2em;
+	width: 1.5em;
+	height: 1.5em;
 	transform: translate(calc(0.5em - 1px)) rotate(45deg);
-	border: thin solid $color;
+	border: thin solid var(--color);
 	border-width: 0 0 1px 1px;
 }
 
 .arrow-arm {
-	left: 0;
+	left: 5px;
 	right: 0;
-	top: 50%;
-	background: $color;
+	top: calc(50%);
+	background: var(--color);
 	position: absolute;
 	height: 1px;
 }
@@ -300,11 +320,8 @@ main {
 }
 
 .flickity-enabled.is-draggable {
-	-webkit-tap-highlight-color: transparent;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
+	@extend %no-tap;
+	@extend %no-select;
 }
 
 .flickity-enabled.is-draggable .flickity-viewport {
@@ -318,71 +335,241 @@ main {
 	cursor: grabbing;
 }
 
+// Social ==============================================================
+.share {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	line-height: 1;
+	padding: 0.75em 0;
+	background: linear-gradient(
+		transparent 0,
+		transparent calc(50% - 1px),
+		var(--color) 0,
+		var(--color) 50%,
+		transparent 0,
+		transparent 100%
+	);
+
+	@media (min-width: $tablet) {
+		position: absolute;
+		top: 0;
+		right: 0;
+		background: transparent;
+		height: 3em;
+	}
+}
+
+.share-button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	vertical-align: top;
+	background: var(--background);
+	// transition: filter var(--transition);
+}
+
+.twitter-button {
+	padding: 0 0.375em 0 1.5em;
+}
+
+.facebook-button {
+	padding: 0 1em 0 0.25em;
+}
+
+// @media (min-width: $desktop) {
+// 	.twitter-button {
+// 		filter: grayscale(1) brightness(1);
+// 	}
+
+// 	.facebook-button {
+// 		filter: grayscale(1) brightness(1.2);
+// 	}
+
+// 	header:hover ~ .share,
+// 	.share:hover {
+// 		.share-button {
+// 			filter: grayscale(0) brightness(1);
+// 		}
+// 	}
+// }
+
 // Ad ==================================================================
 .ad-wrapper {
-	position: absolute;
-	bottom: 0.75em;
-	left: 0;
-	background: rgba($color, 0.1);
+	@extend %no-select;
+	position: relative;
+	transition: opacity var(--transition);
+	margin: 1.5em auto;
+	max-width: 20em;
+	background: var(--background);
+	z-index: 10;
+	padding: 0 0.75em;
+	transform-origin: top left;
 
-	transition: opacity $transition;
+	@media (min-width: $desktop) {
+		position: absolute;
+		bottom: 2em;
+		left: 1.25em;
+		padding: 0;
+	}
 
 	&.is-hidden {
-		opacity: 0;
 		pointer-events: none;
+		animation: drop calc(var(--transition) * 3) ease-in-out both;
+
+		@keyframes drop {
+			20% {
+				transform: rotate(15deg);
+			}
+			30% {
+				transform: rotate(18deg);
+			}
+			100% {
+				transform: translateY(200%);
+			}
+		}
+	}
+}
+
+.ad {
+	border: thin solid var(--color);
+	box-shadow: 0 0.5em 1.5em rgba(0, 0, 0, 0.15);
+	min-height: calc(100px + 1.75em);
+	padding: 0.75em 0;
+
+	@media (min-width: $desktop) {
+		width: 20em;
+		padding: 0;
 	}
 }
 
 #carbonads {
-	max-width: 22em;
 	text-align: left;
 
 	* > span {
 		position: relative;
 		display: block;
-		padding: 0.75rem 1.5em;
+		padding: 0.75rem 0.75em;
 	}
 
 	.carbon-wrap {
 		display: flex;
 	}
+}
 
-	.carbon-img {
-		margin-right: 0.75em;
-		line-height: 1;
+.carbon-img {
+	position: relative;
+	margin-right: 0.75em;
+	line-height: 1;
+	border-radius: 0.25em;
+	overflow: hidden;
+	min-width: 130px;
+	height: 100px;
 
-		img {
-			border-radius: 0.125em;
+	img {
+		vertical-align: top;
+		background: var(--background);
+	}
+
+	&:after {
+		@supports (mix-blend-mode: color) {
+			display: block;
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			// background: red;
+			mix-blend-mode: color;
 		}
-	}
-
-	.carbon-text {
-		margin-bottom: 12px;
-		color: $color;
-		text-decoration: none;
-		font-size: 0.8em;
-		line-height: 1.4;
-	}
-
-	.carbon-poweredby {
-		position: absolute;
-		bottom: 0.75rem;
-		right: 0;
-		right: 1.5rem;
-		text-decoration: none;
-		font-size: 0.7em;
-		line-height: 1;
-		color: $color;
-		opacity: 0.75;
 	}
 }
 
-.close {
+.carbon-text {
+	color: var(--color);
+	text-decoration: none;
+	font-size: 0.75em;
+	line-height: 1.3;
+}
+
+.carbon-poweredby {
 	position: absolute;
-	top: 0;
-	left: 100%;
-	width: 3em;
-	line-height: 3em;
-	background: rgba($color, 0.1);
+	bottom: 0.75rem;
+	right: 0;
+	right: 1.5rem;
+	text-decoration: none;
+	font-size: 0.65em;
+	line-height: 1;
+	color: var(--color);
+	opacity: 0.75;
+}
+
+.carbon-close {
+	display: block;
+	position: absolute;
+	z-index: 20;
+	width: 2.5em;
+	height: 2.5em;
+	top: -1.25em;
+	right: 1.5em;
 	border: 0;
+	border-radius: 50%;
+	cursor: pointer;
+	color: var(--color);
+	transition: transform var(--transition);
+	box-shadow: 0 0.25em 0.75em rgba(0, 0, 0, 0.15);
+
+	svg {
+		background: var(--background);
+		border-radius: 50%;
+		border: 1px solid;
+	}
+
+	@media (min-width: $tablet) {
+		right: -1.25em;
+	}
+
+	&:hover {
+		color: red;
+	}
+
+	&:focus {
+		outline: 0;
+	}
+
+	&.is-hidden {
+		transform: scale(0);
+	}
+}
+
+.carbon-close:hover + .ad,
+.is-hidden .ad {
+	border-color: red;
+	color: red;
+
+	.carbon-text,
+	.carbon-poweredby {
+		color: red;
+		text-decoration: line-through;
+	}
+
+	.carbon-img {
+		opacity: 0.75;
+
+		&:after {
+			background: red;
+		}
+	}
+}
+
+// Footer ==============================================================
+.copyright-wrapper {
+	@media (min-width: $desktop) {
+		display: none;
+	}
+}
+
+.copyright {
+	padding: 0 0 1.5rem;
 }
