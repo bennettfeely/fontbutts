@@ -12,10 +12,11 @@ $sans-serif: -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
 	--transition: 0;
 	--background: #fff;
 	--color: #000;
+	--shadow: 0 0.5em 1em rgba(0, 0, 0, 0.25);
 
 	@media (prefers-color-scheme: dark) {
 		--background: #000;
-		--color: #ffeb3b;
+		--color: #fff;
 	}
 }
 
@@ -26,12 +27,13 @@ $sans-serif: -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
 body {
 	font: 100%/1.5 $sans-serif;
 	text-align: center;
+	background-color: var(--background);
+	color: var(--color);
+	transition: background-color var(--transition), color var(--transition);
 }
 
 .page {
 	position: relative;
-	background: var(--background);
-	color: var(--color);
 	width: 100%;
 	overflow-x: hidden;
 
@@ -59,10 +61,6 @@ h2 {
 h2,
 p {
 	font-size: 0.75em;
-
-	span {
-		opacity: 0.75;
-	}
 }
 
 h3 {
@@ -88,17 +86,6 @@ path {
 
 // Header ==============================================================
 header {
-	background: linear-gradient(
-		transparent 0,
-		transparent 50%,
-		var(--color) 0,
-		var(--color) calc(50% + 1px),
-		transparent 0,
-		transparent 100%
-	);
-	background-size: 100% 3.5em;
-	background-repeat: no-repeat;
-
 	padding: 0.75em 0;
 }
 
@@ -106,22 +93,14 @@ hgroup {
 	margin: 0 auto;
 
 	@media (min-width: $tablet) {
-		display: flex;
-		justify-content: flex-start;
-		align-items: center;
-	}
-
-	h1 {
-		display: inline-block;
-		background: var(--background);
+		text-align: left;
 	}
 
 	h2 {
 		@media (min-width: $tablet) {
-			display: inline-block;
-			background: var(--background);
-			margin-left: 1.5rem;
+			position: absolute;
 			vertical-align: middle;
+			pointer-events: none;
 		}
 	}
 }
@@ -152,11 +131,18 @@ main {
 	pointer-events: none;
 	white-space: nowrap;
 	transition: opacity calc(var(--transition) * 2);
-	opacity: 0.1;
+
+	.is-ready & {
+		opacity: 0.1;
+	}
 
 	.is-selected & {
 		opacity: 1;
 		transform: scale(1);
+	}
+
+	&[style="font-family:Courier"] {
+		letter-spacing: -0.15em;
 	}
 }
 
@@ -173,7 +159,7 @@ main {
 
 	.carousel-cell {
 		padding: 0 1.5em;
-		width: 12em;
+		width: max-width;
 
 		&:after {
 			display: block;
@@ -211,7 +197,11 @@ main {
 		position: relative;
 		background: var(--background);
 		padding: 0 1.5em;
-		transition: transform calc(var(--transition) * 1.5);
+		transition: 
+			transform calc(var(--transition) * 1.5), 
+			background-color var(--transition), 
+			color var(--transition);
+
 	}
 
 	.is-selected .carousel-cell-content {
@@ -225,25 +215,32 @@ main {
 
 .previous,
 .next {
+	@extend %no-tap;
+
 	display: inline-block;
 	position: absolute;
 	top: calc(50% - 1.5em);
 	border: 0;
 	cursor: pointer;
 	background: transparent;
+	color: var(--color);
 
 	svg {
 		width: 3em;
 		height: 3em;
-		border: 1px solid var(--background);
-		transition: width var(--transition);
+		border: 1px solid transparent;
+		transition: 
+			color var(--transition),
+			border-color var(--transition),
+			background-color var(--transition),
+			width var(--transition);
 	}
 
 	&:hover {
 		svg {
 			background: var(--background);
 			border-color: var(--color);
-			box-shadow: 0 0.5em 1.5em rgba(0, 0, 0, 0.15);
+			box-shadow: var(--shadow);
 		}
 	}
 
@@ -274,25 +271,6 @@ main {
 .next {
 	right: 1.5em;
 	transform-origin: right center;
-}
-
-.arrow {
-	@extend %no-tap;
-	position: absolute;
-	width: 1.5em;
-	height: 1.5em;
-	transform: translate(calc(0.5em - 1px)) rotate(45deg);
-	border: thin solid var(--color);
-	border-width: 0 0 1px 1px;
-}
-
-.arrow-arm {
-	left: 5px;
-	right: 0;
-	top: calc(50%);
-	background: var(--color);
-	position: absolute;
-	height: 1px;
 }
 
 // Flickity ============================================================
@@ -342,20 +320,11 @@ main {
 	justify-content: center;
 	line-height: 1;
 	padding: 0.75em 0;
-	background: linear-gradient(
-		transparent 0,
-		transparent calc(50% - 1px),
-		var(--color) 0,
-		var(--color) 50%,
-		transparent 0,
-		transparent 100%
-	);
 
 	@media (min-width: $tablet) {
 		position: absolute;
-		top: 0;
+		top: 0.25em;
 		right: 0;
-		background: transparent;
 		height: 3em;
 	}
 }
@@ -365,8 +334,6 @@ main {
 	align-items: center;
 	justify-content: center;
 	vertical-align: top;
-	background: var(--background);
-	// transition: filter var(--transition);
 }
 
 .twitter-button {
@@ -398,25 +365,25 @@ main {
 .ad-wrapper {
 	@extend %no-select;
 	position: relative;
-	transition: opacity var(--transition);
-	margin: 1.5em auto;
+	margin: 1.5em auto 1em;
 	max-width: 20em;
-	background: var(--background);
+	background-color: var(--background);
 	z-index: 10;
 	padding: 0 0.75em;
 	transform-origin: top left;
+	transition: background-color var(--transition);
 
 	@media (min-width: $desktop) {
 		position: absolute;
-		bottom: 2em;
+		bottom: 2.5em;
 		left: 1.25em;
 		padding: 0;
 	}
 }
 
 .ad {
-	border: thin solid var(--color);
-	box-shadow: 0 0.5em 1.5em rgba(0, 0, 0, 0.15);
+	border: 1px solid var(--color);
+	box-shadow: var(--shadow);
 	min-height: calc(100px + 1.75em);
 	padding: 0.75em 0;
 
@@ -452,6 +419,7 @@ main {
 	img {
 		vertical-align: top;
 		background: var(--background);
+		box-shadow: var(--shadow);
 	}
 
 	&:after {
@@ -463,7 +431,6 @@ main {
 			left: 0;
 			right: 0;
 			bottom: 0;
-			// background: red;
 			mix-blend-mode: color;
 		}
 	}
@@ -485,7 +452,6 @@ main {
 	font-size: 0.65em;
 	line-height: 1;
 	color: var(--color);
-	opacity: 0.75;
 }
 
 .carbon-close {
@@ -501,8 +467,7 @@ main {
 	border-radius: 50%;
 	cursor: pointer;
 	color: var(--color);
-	transition: transform var(--transition);
-	box-shadow: 0 0.25em 0.75em rgba(0, 0, 0, 0.15);
+	box-shadow: var(--shadow);
 
 	svg {
 		background: var(--background);
@@ -532,10 +497,12 @@ main {
 	border-color: red;
 	color: red;
 
+	&,
 	.carbon-text,
 	.carbon-poweredby {
 		color: red;
 		text-decoration: line-through;
+	transition-duration: 0s;
 	}
 
 	.carbon-img {
@@ -555,5 +522,5 @@ main {
 }
 
 .copyright {
-	padding: 0 0 1.5rem;
+	padding: 0 0 0.75em;
 }

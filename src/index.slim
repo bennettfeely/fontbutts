@@ -16,10 +16,19 @@ html lang="en"
 		/ Styles
 		link href="style.min.css" rel="stylesheet"
 		/ Fonts
-		link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Amatic+SC&family=Geostar+Fill&family=Coiny&family=Montserrat&family=Playfair+Display&family=Shadows+Into+Light&family=Beth+Ellen&family=Nunito&family=Yeseva+One&display=swap" rel="stylesheet"
+		link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet"
+		link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap" rel="stylesheet"
+		link href="https://fonts.googleapis.com/css2?family=Duru+Sans&display=swap" rel="stylesheet"
+		link href="https://fonts.googleapis.com/css2?family=Geostar+Fill&display=swap" rel="stylesheet"
+		link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet"
+		link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap" rel="stylesheet"
+		link href="https://fonts.googleapis.com/css2?family=Poiret+One&display=swap" rel="stylesheet"
+		link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet"
+		link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" 
+		link href="https://fonts.googleapis.com/css2?family=Yatra+One&display=swap" rel="stylesheet"
 	body
 		.page
-			- fonts = ["Abril Fatface", "Amatic SC", "Arial", "Beth Ellen", "Book Antiqua", "Coiny", "Comic Sans MS", "Courier", "Geneva", "Georgia", "Geostar Fill", "Helvetica Neue", "Impact", "Lucida Grande", "Monaco", "Nunito", "Palatino", "Papyrus", "Playfair Display", "Shadows Into Light", "Tahoma", "Times New Roman", "Trebuchet MS", "Yeseva One"];
+			- fonts = ["Abril Fatface", "Amatic SC", "Arial", "Book Antiqua", "Comic Sans MS", "Courier", "Duru Sans", "Geneva", "Georgia", "Geostar Fill", "Helvetica", "Lucida Grande", "Oswald", "Palatino", "Papyrus", "Playfair Display", "Poiret One", "Shadows Into Light", "Tahoma", "Times New Roman", "Trebuchet MS", "Yatra One"];
 			header
 				hgroup
 					h1 
@@ -29,8 +38,8 @@ html lang="en"
 			main
 				.main-carousel.carousel
 					- for font in fonts  do
-						.carousel-cell style="font-family: #{font}"
-							.butt 
+						.carousel-cell
+							.butt style="font-family: #{font}"
 								| )&nbsp;&nbsp;(
 								br
 								| (&nbsp;)(&nbsp;)
@@ -59,7 +68,7 @@ html lang="en"
 				.share-button.facebook-button
 					#fb-root
 					script async="async" defer="defer" crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v7.0&appId=247433128675302&autoLogAppEvents=1" nonce="TgnPIgEY"
-					.fb-like data-href="https://fontbutts.netlify.app/" data-width="" data-layout="button" data-action="like" data-size="large" data-share="false"
+					.fb-like data-href="https://fontbutts.netlify.app/" data-width="" data-layout="button" data-action="like" data-size="large" data-share="true"
 			footer.copyright-wrapper
 				p.copyright &copy; 2020 Bennett Feely (<a href="https://bennettfeely.com/">bennettfeely.com</a>)
 		
@@ -67,24 +76,32 @@ html lang="en"
 		javascript:
 			let html = document.querySelector('html');
 			let transition = 300; // ms
-
-			console.log("transition: " + transition);
+			let root =  document.documentElement;
 
 			// Main slider
 			var main = new Flickity('.main-carousel', {
 				cellAlign: 'center',
-				initialIndex: 11,
+				initialIndex: 0,
 				pageDots: false,
 				percentPosition: true,
 				prevNextButtons: false,
-				wrapAround: true
+				wrapAround: true,
+				on: {
+					change: function() {
+						var hue = Math.random() * 360;
+						root.style.setProperty('--background', 'hsl('+ hue + ', 50%, 20%)');
+
+						var hue = Math.random() * 360;
+						root.style.setProperty('--color', 'hsl('+ hue + ', 50%, 80%)');
+					}
+				}
 			});
 
 			// Nav slider
 			var secondary = new Flickity('.secondary-carousel', {
 				asNavFor: '.main-carousel',
 				cellAlign: 'center',
-				initialIndex: 11,
+				initialIndex: 0,
 				pageDots: false,
 				percentPosition: true,
 				prevNextButtons: false,
@@ -150,9 +167,6 @@ html lang="en"
 			// var random_dark = "#" + dark[Math.floor(Math.random() * dark.length)];
 			// var random_light = "#" + light[Math.floor(Math.random() * light.length)];
 
-			// let root =  document.documentElement;
-			// root.style.setProperty('--background', random_dark);
-			// root.style.setProperty('--color', random_light);
 
 
 			// Google Analytics
