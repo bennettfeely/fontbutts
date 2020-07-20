@@ -150,14 +150,14 @@ main {
 
 .secondary-carousel {
 	line-height: 3em;
-	background: linear-gradient(
-		transparent 0,
-		transparent 50%,
-		var(--color) 0,
-		var(--color) calc(50% + 1px),
-		transparent 0,
-		transparent 100%
-	);
+	// background: linear-gradient(
+	// 	transparent 0,
+	// 	transparent 50%,
+	// 	var(--color) 0,
+	// 	var(--color) calc(50% + 1px),
+	// 	transparent 0,
+	// 	transparent 100%
+	// );
 
 	.carousel-cell {
 		padding: 0 1.5em;
@@ -390,7 +390,7 @@ main {
 
 	@media (min-width: $desktop) {
 		position: absolute;
-		bottom: 2.5em;
+		bottom: 2.625em;
 		left: 1.25em;
 		padding: 0;
 	}
