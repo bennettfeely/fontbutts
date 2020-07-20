@@ -49,6 +49,7 @@ html lang="en"
 				button.next
 					svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg"
 						path d="M8 5L2 5M5 2L8 5L5 8"
+					span.helper Next
 			footer
 				.secondary-carousel.carousel
 					- for font in fonts  do
@@ -78,18 +79,6 @@ html lang="en"
 			let transition = 300; // ms
 			let root =  document.documentElement;
 
-			// var slides = document.querySelectorAll(".main-carousel .carousel-cell");
-			// slides.forEach((slide) => {
-			// 	console.log(slide);
-
-			// 	var hue = Math.random() * 360;
-			// 	slide.style.backgroundColor =  'hsl('+ hue + ', 50%, 20%)';
-
-			// 	var hue = Math.random() * 360;
-			// 	slide.style.color =  'hsl('+ hue + ', 50%, 80%)';
-				
-			// });
-
 			// Main slider
 			var main = new Flickity('.main-carousel', {
 				cellAlign: 'center',
@@ -100,11 +89,10 @@ html lang="en"
 				wrapAround: true,
 				on: {
 					change: function() {
-						// var hue = Math.random() * 360;
-						// root.style.setProperty('--background', 'hsl('+ hue + ', 50%, 20%)');
-
-						// var hue = Math.random() * 360;
-						// root.style.setProperty('--color', 'hsl('+ hue + ', 50%, 80%)');
+						var hue = Math.random() * 360;
+						root.style.setProperty('--background', 'hsl('+ hue + ', 90%, 20%)');
+						var hue = Math.random() * 360;
+						root.style.setProperty('--color', 'hsl('+ hue + ', 90%, 80%)');
 					}
 				}
 			});
@@ -140,10 +128,12 @@ html lang="en"
 
 			// Next slide trigger
 			let next = document.querySelector('.next');
+			let helper = document.querySelector('.helper');
 			next.addEventListener( 'click', function() {
 				main.next();
 
-				next.classList.add('is-active');
+
+				next.classList.add('is-active', 'no-help');
 				setTimeout(function() {
 					next.classList.remove('is-active');
 				}, transition);

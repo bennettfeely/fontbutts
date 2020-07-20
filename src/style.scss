@@ -29,7 +29,7 @@ body {
 	text-align: center;
 	background-color: var(--background);
 	color: var(--color);
-	transition: background-color var(--transition), color var(--transition);
+	// transition: background-color var(--transition), color var(--transition);
 }
 
 .page {
@@ -130,7 +130,9 @@ main {
 	line-height: 1;
 	pointer-events: none;
 	white-space: nowrap;
-	transition: opacity calc(var(--transition) * 2);
+	transition: 
+ 		color calc(var(--transition)),
+		opacity calc(var(--transition) * 2);
 
 	.is-ready & {
 		opacity: 0.1;
@@ -198,9 +200,7 @@ main {
 		background: var(--background);
 		padding: 0 1.5em;
 		transition: 
-			transform calc(var(--transition) * 1.5), 
-			background-color var(--transition), 
-			color var(--transition);
+			transform calc(var(--transition) * 1.5);
 
 	}
 
@@ -219,29 +219,27 @@ main {
 
 	display: inline-block;
 	position: absolute;
-	top: calc(50% - 1.5em);
-	border: 0;
+	top: calc(50% - 3em);
 	cursor: pointer;
 	background: transparent;
 	color: var(--color);
+	border: 1px solid transparent;
+	transition: 
+		border-color var(--transition),
+		width var(--transition);
+	text-align: center;
 
 	svg {
 		width: 3em;
 		height: 3em;
-		border: 1px solid transparent;
-		transition: 
-			color var(--transition),
-			border-color var(--transition),
-			background-color var(--transition),
-			width var(--transition);
+		vertical-align: top;
+
 	}
 
 	&:hover {
-		svg {
-			background: var(--background);
-			border-color: var(--color);
-			box-shadow: var(--shadow);
-		}
+		background: var(--background);
+		border-color: var(--color);
+		// box-shadow: var(--shadow);
 	}
 
 	&:active,
@@ -264,13 +262,30 @@ main {
 }
 
 .previous {
-	left: 1.5em;
+	left: .75em;
 	transform-origin: left center;
+
+	@media (min-width: $tablet) {
+		left: 1.5em;
+	}
 }
 
 .next {
-	right: 1.5em;
+	right: .75em;
 	transform-origin: right center;
+
+	@media (min-width: $tablet) {
+		right: 1.5em;
+	}
+}
+
+.helper {
+	display: block;
+	padding: 0 0 .25em;
+
+	.no-help & {
+		display: none;
+	}
 }
 
 // Flickity ============================================================
@@ -334,6 +349,7 @@ main {
 	align-items: center;
 	justify-content: center;
 	vertical-align: top;
+	min-width: 6em;
 }
 
 .twitter-button {
@@ -371,7 +387,6 @@ main {
 	z-index: 10;
 	padding: 0 0.75em;
 	transform-origin: top left;
-	transition: background-color var(--transition);
 
 	@media (min-width: $desktop) {
 		position: absolute;
@@ -383,9 +398,9 @@ main {
 
 .ad {
 	border: 1px solid var(--color);
-	box-shadow: var(--shadow);
 	min-height: calc(100px + 1.75em);
 	padding: 0.75em 0;
+	// box-shadow: var(--shadow);
 
 	@media (min-width: $desktop) {
 		width: 20em;
@@ -419,7 +434,7 @@ main {
 	img {
 		vertical-align: top;
 		background: var(--background);
-		box-shadow: var(--shadow);
+		// box-shadow: var(--shadow);
 	}
 
 	&:after {
@@ -467,7 +482,7 @@ main {
 	border-radius: 50%;
 	cursor: pointer;
 	color: var(--color);
-	box-shadow: var(--shadow);
+	// box-shadow: var(--shadow);
 
 	svg {
 		background: var(--background);
@@ -502,7 +517,7 @@ main {
 	.carbon-poweredby {
 		color: red;
 		text-decoration: line-through;
-	transition-duration: 0s;
+		transition-duration: 0s;
 	}
 
 	.carbon-img {
@@ -517,7 +532,9 @@ main {
 // Footer ==============================================================
 .copyright-wrapper {
 	@media (min-width: $desktop) {
-		display: none;
+		position: absolute;
+		top: 3.625em;
+		left: 1.5em;
 	}
 }
 
