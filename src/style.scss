@@ -150,6 +150,12 @@ main {
 
 .secondary-carousel {
 	line-height: 3em;
+	border-bottom: 1px solid var(--color);
+
+	@media (min-width: $tablet) {
+	border: 0;
+
+	}
 	// background: linear-gradient(
 	// 	transparent 0,
 	// 	transparent 50%,
@@ -169,7 +175,7 @@ main {
 			position: absolute;
 			left: 50%;
 			top: 0;
-			bottom: 50%;
+			bottom: 0;
 			width: 1px;
 			background: var(--color);
 			transform: scaleY(0);
@@ -381,7 +387,7 @@ main {
 .ad-wrapper {
 	@extend %no-select;
 	position: relative;
-	margin: 1.5em auto 1em;
+	margin: 2.5em auto 1em;
 	max-width: 20em;
 	background-color: var(--background);
 	z-index: 10;
