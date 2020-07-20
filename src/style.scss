@@ -489,6 +489,7 @@ main {
 }
 
 .carbon-close {
+	@extend %no-tap;
 	display: block;
 	position: absolute;
 	z-index: 20;
