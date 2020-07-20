@@ -412,23 +412,6 @@ main {
 		left: 1.25em;
 		padding: 0;
 	}
-
-	&.is-hidden {
-		pointer-events: none;
-		animation: drop calc(var(--transition) * 3) ease-in-out both;
-
-		@keyframes drop {
-			20% {
-				transform: rotate(15deg);
-			}
-			30% {
-				transform: rotate(18deg);
-			}
-			100% {
-				transform: translateY(200%);
-			}
-		}
-	}
 }
 
 .ad {

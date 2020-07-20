@@ -61,7 +61,7 @@ html lang="en"
 					script async="async" defer="defer" crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v7.0&appId=247433128675302&autoLogAppEvents=1" nonce="TgnPIgEY"
 					.fb-like data-href="https://fontbutts.netlify.app/" data-width="" data-layout="button" data-action="like" data-size="large" data-share="false"
 			footer.copyright-wrapper
-				p.copyright &copy; 2020 <a href="https://bennettfeely.com/">Bennett Feely</a>
+				p.copyright &copy; 2020 Bennett Feely (<a href="https://bennettfeely.com/">bennettfeely.com</a>)
 		
 		script src="src/flickity.pkgd.min.js"
 		javascript:
@@ -124,11 +124,7 @@ html lang="en"
 			let close = document.querySelector('.carbon-close');
 			let ad_wrapper = document.querySelector('.ad-wrapper');
 			close.addEventListener( 'click', function() {
-				ad_wrapper.classList.add('is-hidden');
-
-				setTimeout(function() {
-					ad_wrapper.style.display = "none";
-				}, transition * 3);
+				ad_wrapper.style.display = "none";
 			});
 
 			// Set random color and background color
