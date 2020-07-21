@@ -281,6 +281,7 @@ main {
 
 .flickity-viewport {
 	position: relative;
+	touch-action: manipulation;
 	height: 100%;
 
 	.main-carousel & {
@@ -399,7 +400,7 @@ main {
 
 	img {
 		vertical-align: top;
-		background: var(--background);
+		background: rgba(0,0,0,.15);
 	}
 
 	&:after {
@@ -498,8 +499,7 @@ main {
 }
 
 // Footer ==============================================================
-.copyright-wrapper,
-.switch-wrapper {
+.copyright-wrapper {
 	display: block;
 	line-height: 1;
 	padding: 0 .75em 1.5em;
@@ -519,32 +519,6 @@ main {
 	// padding: 0 0 0.75em;
 }
 
-.switch-wrapper {
-	input {
-		filter: grayscale(1);
-		mix-blend-mode: multiply;
-		margin-right: .5em;
-	}
-
-	label {
-		display: flex;
-		align-items: center;
-		cursor: pointer;
-
-		&:hover {
-			text-decoration: underline;
-		}
-	}
-
-
-	@media (min-width: $tablet) {
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		line-height: 2em;
-		padding: 0 .75em;
-	}
-}
 
 // Fonts ===============================================================
 @font-face { 
