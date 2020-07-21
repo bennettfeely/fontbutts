@@ -11,7 +11,6 @@ html lang="en"
 		link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png"
 		link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png"
 		link rel="mask-icon" href="img/safari-pinned-tab.svg" color="#5bbad5"
-		meta name="msapplication-TileColor" content="#2b5797"
 		meta name="theme-color" content="#ffffff"
 		/ Styles
 		link href="style.min.css" rel="stylesheet"
@@ -75,6 +74,7 @@ html lang="en"
 		script src="src/flickity.pkgd.min.js"
 		javascript:
 			let html = document.querySelector('html');
+			let theme = document.querySelector('[name="theme-color"]');
 			let transition = 300; // ms
 			let root =  document.documentElement;
 			slides = 0;
@@ -89,8 +89,12 @@ html lang="en"
 				wrapAround: true,
 				on: {
 					change: function() {
+						// Set random background color
 						var hue = Math.random() * 360;
 						root.style.setProperty('--background', 'hsl('+ hue + ', 90%, 15%)');
+						theme.setAttribute('content', hue);
+
+						// Set random text color
 						var hue = Math.random() * 360;
 						root.style.setProperty('--color', 'hsl('+ hue + ', 90%, 85%)');
 					}
@@ -145,31 +149,6 @@ html lang="en"
 			close.addEventListener( 'click', function() {
 				ad_wrapper.style.display = "none";
 			});
-
-			// Set random color and background color
-			// let dark = ["d32f2f", "c2185b", "6a1b9a", "4527a0", "283593", "0d47a1", "0277bd", "006064", "00695c", "2e7d32", "558b2f", "f57f17", "e65100", "1a1a1a"];
-			// let light = ["ffcdd2", "f8bbd0", "ce93d8", "b39ddb", "9fa8da", "bbdefb", "81d4fa", "80deea", "80cbc4", "a5d6a7", "c5e1a5", "e6ee9c", "fff176", "ffffff"];
-
-			// // [--background, --color]
-			// var scheme = [
-			// 	["#0d47a1", "#ffffff"]
-
-			// ];
-
-
-			// #1a237e, #EF9A9A
-			// #B71C1C, #FFEB3B
-			// #263238, #ffc107
-			// #004D40, #FFAB91
-			// #FBE9E7, #C2185B
-
-
-
-
-			// var random_dark = "#" + dark[Math.floor(Math.random() * dark.length)];
-			// var random_light = "#" + light[Math.floor(Math.random() * light.length)];
-
-
 
 			// Google Analytics
 			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
