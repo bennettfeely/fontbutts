@@ -203,6 +203,7 @@ main {
 .previous,
 .next {
 	@extend %no-tap;
+	touch-action: manipulation;
 	display: inline-block;
 	position: absolute;
 	top: calc(50% - 3em);
