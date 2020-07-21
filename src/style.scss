@@ -60,7 +60,8 @@ h2 {
 }
 
 h2,
-p {
+p,
+label {
 	font-size: 0.75em;
 }
 
@@ -497,9 +498,11 @@ main {
 }
 
 // Footer ==============================================================
-.copyright-wrapper {
+.copyright-wrapper,
+.switch-wrapper {
+	display: block;
 	line-height: 1;
-	padding: 0 .75em;
+	padding: 0 .75em 1.5em;
 
 	@media (min-width: $tablet) {
 		padding: 1.5em .75em;
@@ -514,6 +517,33 @@ main {
 
 .copyright {
 	// padding: 0 0 0.75em;
+}
+
+.switch-wrapper {
+	input {
+		filter: grayscale(1);
+		mix-blend-mode: multiply;
+		margin-right: .5em;
+	}
+
+	label {
+		display: flex;
+		align-items: center;
+		cursor: pointer;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+
+
+	@media (min-width: $tablet) {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		line-height: 2em;
+		padding: 0 .75em;
+	}
 }
 
 // Fonts ===============================================================

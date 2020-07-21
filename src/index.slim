@@ -72,12 +72,12 @@ html lang="en"
 					.fb-like data-href="https://fontbutts.netlify.app/" data-width="" data-layout="button" data-action="like" data-size="large" data-share="true"
 			footer.copyright-wrapper
 				p.copyright &copy; 2020 Bennett Feely (<a href="https://bennettfeely.com/">bennettfeely.com</a>)
-		
 		script src="src/flickity.pkgd.min.js"
 		javascript:
 			let html = document.querySelector('html');
 			let transition = 300; // ms
 			let root =  document.documentElement;
+			slides = 0;
 
 			// Main slider
 			var main = new Flickity('.main-carousel', {
